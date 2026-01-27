@@ -23,7 +23,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-ash flex items-center justify-center px-4 mx-4">
+    <div className="bg-ash flex items-center justify-center px-4 my-4">
       <div className="w-full max-w-md bg-ashLight border border-white/10 rounded-2xl p-8 shadow-lg">
         {/* Header */}
         <div className="text-center mb-8">

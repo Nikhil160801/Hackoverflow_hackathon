@@ -1,13 +1,17 @@
-import Navbar from "../components/Navbar";
-import SignIn from "./SignInPage";
-import SignUp from "./SignUpPage";
+import Analytics from "./AnalyticsPage";
+import Announcements from "./AnnouncementsPage";
+import Dashboard from "./DashboardPage";
+import LostAndFound from "./LostAndFoundPage";
+import ReportIssue from "./ReportIssuePage";
 
 const HomePage = () => {
   return (
     <div>
-        <Navbar/>
-        <SignIn/>
-        <SignUp/>
+       <Dashboard/>
+       <ReportIssue/>
+       <Announcements/>
+       <LostAndFound/>
+       <Analytics/>
     </div>
   )
 }
