@@ -1,28 +1,38 @@
 import { useState } from "react";
 import { Menu, X, Search } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   const navItems = [
-    "Dashboard",
-    "Report Issue",
-    "Announcements",
-    "Lost & Found",
-    "Analytics",
+    { label: "Dashboard", path: "/dashboard" },
+    { label: "Report Issue", path: "/report" },
+    { label: "Announcements", path: "/announcements" },
+    { label: "Lost & Found", path: "/lost-found" },
+    { label: "Analytics", path: "/analytics" },
   ];
+
+  const navLinkClass = ({ isActive }) =>
+    `relative transition ${
+      isActive
+        ? "text-white drop-shadow-[0_0_8px_#b026ff]"
+        : "text-white/70 hover:text-white hover:drop-shadow-[0_0_8px_#b026ff]"
+    }`;
 
   return (
     <nav className="w-full bg-neutral-800 border-b border-white/10 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
 
-        {/* Logo */}
-        <div className="text-xl sm:text-2xl font-semibold tracking-wide text-white">
+        {/* Logo → Home */}
+        <Link
+          to="/"
+          className="text-xl sm:text-2xl font-semibold tracking-wide text-white hover:opacity-90 transition"
+        >
           Smart<span className="text-neon">Hostel</span>
-        </div>
+        </Link>
 
-        {/* Search Bar */}
+        {/* Search (Desktop) */}
         <div className="hidden lg:flex items-center bg-ashLight rounded-full px-4 py-2 border border-white/10 focus-within:border-neon focus-within:shadow-neon transition">
           <Search size={16} className="text-white/50 mr-2" />
           <input
@@ -32,15 +42,13 @@ const Navbar = () => {
           />
         </div>
 
-        {/* Desktop Nav Links */}
-        <ul className="hidden md:flex items-center gap-7 text-sm text-white/70">
+        {/* Desktop Nav */}
+        <ul className="hidden md:flex items-center gap-7 text-sm">
           {navItems.map((item) => (
-            <li
-              key={item}
-              className="relative cursor-pointer transition hover:text-white hover:drop-shadow-[0_0_8px_#b026ff]"
-            >
-              {item}
-            </li>
+            <NavLink key={item.path} to={item.path} className={navLinkClass}>
+              {item.label}
+              <span className="absolute left-0 -bottom-1 w-full bg-neon scale-x-0 hover:scale-x-100 transition-transform origin-left"></span>
+            </NavLink>
           ))}
         </ul>
 
@@ -52,7 +60,6 @@ const Navbar = () => {
           >
             Sign In
           </Link>
-
           <Link
             to="/signup"
             className="text-sm text-white/70 hover:text-white hover:drop-shadow-[0_0_8px_#b026ff] transition"
@@ -61,7 +68,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Toggle */}
         <button
           className="md:hidden text-white/80 hover:text-white transition"
           onClick={() => setOpen(!open)}
@@ -70,11 +77,11 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Dropdown */}
+      {/* Mobile Menu */}
       {open && (
         <div className="md:hidden bg-ashLight border-t border-white/10 px-6 py-4 space-y-4">
 
-          {/* Search (Mobile) */}
+          {/* Search */}
           <div className="flex items-center bg-ash rounded-full px-4 py-2 border border-white/10 focus-within:border-neon focus-within:shadow-neon transition">
             <Search size={16} className="text-white/50 mr-2" />
             <input
@@ -85,18 +92,20 @@ const Navbar = () => {
           </div>
 
           {/* Links */}
-          <ul className="space-y-3 text-sm text-white/80">
+          <ul className="space-y-3 text-sm">
             {navItems.map((item) => (
-              <li
-                key={item}
-                className="cursor-pointer hover:text-white hover:drop-shadow-[0_0_8px_#b026ff] transition"
+              <NavLink
+                key={item.path}
+                to={item.path}
+                onClick={() => setOpen(false)}
+                className={navLinkClass}
               >
-                {item}
-              </li>
+                {item.label}
+              </NavLink>
             ))}
           </ul>
 
-          {/* Auth Buttons (Mobile) */}
+          {/* Auth (Mobile) */}
           <div className="flex gap-3 pt-2">
             <Link
               to="/signin"
@@ -105,7 +114,6 @@ const Navbar = () => {
             >
               Sign In
             </Link>
-
             <Link
               to="/signup"
               onClick={() => setOpen(false)}
