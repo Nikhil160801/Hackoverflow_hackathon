@@ -104,7 +104,11 @@ const LostAndFound = () => {
                 <div>📅 Date: {item.date}</div>
               </div>
 
-              <button className="mt-5 w-full py-2 rounded-full bg-purple-600/20 text-purple-400 border border-purple-500/30 hover:bg-purple-600/30 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)] transition">
+              {/* <button className="mt-5 w-full py-2 rounded-full bg-purple-600/20 text-purple-400 border border-purple-500/30 hover:bg-purple-600/30 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)] transition">
+                {item.status === "Lost" ? "I Found This" : "Claim Item"}
+              </button> */}
+
+              <button className="mt-5 w-full py-2 rounded-full bg-purple-600/20 text-purple-400 ring-2 ring-white hover:bg-purple-600/30 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)] transition">
                 {item.status === "Lost" ? "I Found This" : "Claim Item"}
               </button>
             </div>
@@ -113,9 +117,7 @@ const LostAndFound = () => {
 
         {/* Empty State */}
         {filteredItems.length === 0 && (
-          <div className="text-center text-gray-500 mt-16">
-            No items found.
-          </div>
+          <div className="text-center text-gray-500 mt-16">No items found.</div>
         )}
       </div>
     </div>
